@@ -1,714 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ooalah Dev - Company Profile</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    
-    section {
-      scroll-snap-align: start;
-    }
-    
-    .hero-bg {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-    }
-    
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    
-    .fade-in {
-      opacity: 0;
-      transform: translateY(60px);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    .fade-in-left {
-      opacity: 0;
-      transform: translateX(-60px);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .fade-in-left.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    
-    .fade-in-right {
-      opacity: 0;
-      transform: translateX(60px);
-      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    
-    .fade-in-right.visible {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    
-    .typewriter {
-      border-right: 3px solid #667eea;
-      animation: blink 1.2s infinite;
-      white-space: nowrap;
-      overflow: hidden;
-      display: inline-block;
-    }
-    
-    @keyframes blink {
-      0%, 50% { border-color: transparent; }
-      51%, 100% { border-color: #667eea; }
-    }
-    
-    .nav-link {
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -2px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, #667eea, #764ba2);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-link:hover::after {
-      width: 100%;
-    }
-    
-    .card-hover {
-      transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card-hover::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transition: left 0.5s;
-    }
-    
-    .card-hover:hover::before {
-      left: 100%;
-    }
-    
-    .card-hover:hover {
-      transform: translateY(-15px) scale(1.02);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.15);
-    }
-    
-    .image-container {
-      overflow: hidden;
-      border-radius: 24px;
-      position: relative;
-    }
-    
-    .image-container::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    
-    .image-container:hover::after {
-      opacity: 1;
-    }
-    
-    .image-container img {
-      transition: transform 0.5s ease;
-    }
-    
-    .image-container:hover img {
-      transform: scale(1.1);
-    }
-    
-    .scroll-snap-y {
-    scroll-snap-type: y mandatory; /* Changed from 'proximity' to 'mandatory' */
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-behavior: smooth; /* Add smooth scrolling */
-}
-    
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: linear-gradient(180deg, #667eea, #764ba2);
-      border-radius: 3px;
-    }
-    
-    .floating {
-      animation: floating 6s ease-in-out infinite;
-    }
-    
-    @keyframes floating {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    .pulse-glow {
-      animation: pulseGlow 2s ease-in-out infinite;
-    }
-    
-    @keyframes pulseGlow {
-      0%, 100% { 
-        box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
-        transform: scale(1);
-      }
-      50% { 
-        box-shadow: 0 0 30px rgba(102, 126, 234, 0.6);
-        transform: scale(1.05);
-      }
-    }
-    
-    .gradient-text {
-      background: linear-gradient(45deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: gradientShift 8s ease infinite;
-    }
-    
-    .glass-effect {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-    
-    .counter {
-      font-variant-numeric: tabular-nums;
-    }
-    
-    .team-card {
-      transition: all 0.4s ease;
-      cursor: pointer;
-    }
-    
-    .team-card:hover {
-      transform: translateY(-10px);
-    }
-    
-    .team-card:hover .team-image {
-      box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
-    }
-    
-    .form-input {
-      transition: all 0.3s ease;
-    }
-    
-    .form-input:focus {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
-    
-    .text-shadow {
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-    }
-    
-    .mobile-menu {
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-    }
-    
-    .mobile-menu.open {
-      transform: translateX(0);
-    }
-    
-    .hamburger {
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -6px);
-    }
-    
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: #333;
-      margin: 5px 0;
-      transition: 0.3s;
-      border-radius: 2px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamam Yusuf A. - CyberSec Enthusiast</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    @media (max-width: 768px) {
-      .hero-bg {
-        background-attachment: scroll;
-      }
-    }
-  </style>
+        body {
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            background: #0d1117;
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .profile-section {
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .profile-image {
+            width: 160px;
+            height: 160px;
+            border-radius: 8px;
+            margin: 0 auto 2rem;
+            border: 2px solid #30363d;
+            overflow: hidden;
+            background: #161b22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .profile-image:hover {
+            border-color: #58a6ff;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: #f0f6fc;
+            font-weight: 400;
+        }
+
+        .title {
+            font-size: 1.1rem;
+            color: #7d8590;
+            margin-bottom: 2rem;
+        }
+
+        .terminal-prompt {
+            font-size: 0.9rem;
+            color: #58a6ff;
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .nav-links a {
+            color: #7d8590;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #58a6ff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: #58a6ff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .section {
+            padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #f0f6fc;
+            font-weight: 400;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        h2::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: #58a6ff;
+        }
+
+        .about-content {
+            font-size: 1rem;
+            color: #c9d1d9;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .ctf-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #58a6ff;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            color: #58a6ff;
+            display: block;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            color: #7d8590;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 2rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: #58a6ff;
+        }
+
+        .skill-category h3 {
+            font-size: 1.1rem;
+            color: #f0f6fc;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #c9d1d9;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: #58a6ff;
+            color: #58a6ff;
+        }
+
+        .experience-list {
+            list-style: none;
+        }
+
+        .experience-item {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .experience-item:hover {
+            border-color: #58a6ff;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .experience-title {
+            font-size: 1.1rem;
+            color: #f0f6fc;
+            font-weight: 400;
+        }
+
+        .experience-company {
+            color: #58a6ff;
+            font-size: 0.9rem;
+        }
+
+        .experience-date {
+            color: #7d8590;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .experience-description {
+            color: #c9d1d9;
+            font-size: 0.95rem;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #7d8590;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .contact-link:hover {
+            color: #58a6ff;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #7d8590;
+            font-size: 0.85rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        .typing-effect {
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid #58a6ff;
+            width: 0;
+            animation: typing 3s steps(30) 1s forwards, blink 1s infinite 4s;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #58a6ff; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .contact-links {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .experience-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .ctf-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
-<body class="scroll-snap-y bg-white">
-  <!-- Header -->
-  <header class="fixed top-0 left-0 right-0 glass-effect z-50 border-b border-white/20">
-    <div class="container mx-auto px-6 py-4 flex justify-between items-center max-w-7xl">
-      <div class="text-xl font-semibold text-gray-900 flex items-center">
-        <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-3 pulse-glow">
-          <span class="text-white font-bold text-lg">O</span>
-        </div>
-        <span class="gradient-text">Ooalah</span>
-      </div>
-      <nav class="hidden md:flex space-x-10">
-        <a href="#home" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">Home</a>
-        <a href="#about" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">About</a>
-        <a href="#services" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">Services</a>
-        <a href="#team" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">Team</a>
-        <a href="#contact" class="nav-link text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors">Contact</a>
-      </nav>
-      <div class="md:hidden hamburger" onclick="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
-  </header>
-
-  <!-- Mobile Menu -->
-  <div id="mobileMenu" class="mobile-menu fixed top-0 right-0 h-full w-80 glass-effect z-40 p-8 md:hidden">
-    <nav class="flex flex-col space-y-8 mt-20">
-      <a href="#home" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors" onclick="toggleMobileMenu()">Home</a>
-      <a href="#about" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors" onclick="toggleMobileMenu()">About</a>
-      <a href="#services" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors" onclick="toggleMobileMenu()">Services</a>
-      <a href="#team" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors" onclick="toggleMobileMenu()">Team</a>
-      <a href="#contact" class="text-lg font-medium text-gray-700 hover:text-gray-900 transition-colors" onclick="toggleMobileMenu()">Contact</a>
-    </nav>
-  </div>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero-bg flex items-center justify-center min-h-screen relative overflow-hidden">
-    <div class="absolute inset-0 bg-black/20"></div>
-    <div class="text-center px-6 max-w-4xl mx-auto relative z-10">
-      <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight text-shadow fade-in">
-        Innovative Solutions
-        <br>
-        <span class="text-white/90">
-          for Tomorrow<span class="typewriter" id="typewriter"></span>
-        </span>
-      </h1>
-      <p class="text-xl md:text-2xl text-white/80 mb-12 leading-relaxed max-w-2xl mx-auto fade-in text-shadow">
-        Driving progress through cutting-edge technology and sustainable innovation.
-      </p>
-      <a href="#about" class="inline-block px-12 py-5 bg-white/20 glass-effect text-white rounded-full text-lg font-semibold hover:bg-white/30 transition-all duration-300 shadow-2xl hover:shadow-3xl transform hover:scale-105 fade-in">
-        Discover More →
-      </a>
-    </div>
-    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 floating">
-      <div class="w-8 h-12 border-2 border-white/50 rounded-full flex justify-center">
-        <div class="w-1 h-4 bg-white/70 rounded-full mt-2 animate-pulse"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="py-32 bg-gradient-to-br from-gray-50 to-white min-h-screen flex items-center">
-    <div class="container mx-auto px-6 max-w-7xl">
-      <div class="grid md:grid-cols-2 gap-20 items-center">
-        <div class="fade-in-left">
-          <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-            Forward Thinking
-            <br>
-            <span class="gradient-text">Company</span>
-          </h2>
-          <p class="text-xl text-gray-600 mb-10 leading-relaxed">
-            Ooalah specializes in delivering transformative digital solutions that empower businesses to thrive in today's fast-paced world. Our focus is on innovation, quality, and sustainability.
-          </p>
-          <div class="grid grid-cols-2 gap-8">
-            <div class="text-center p-6 rounded-2xl glass-effect">
-              <div class="text-4xl font-bold gradient-text counter" data-target="1">0</div>
-              <p class="text-lg text-gray-600 mt-2">Projects Completed</p>
+<body>
+    <header>
+        <div class="container">
+            <div class="profile-section">
+                <div class="profile-image">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgZmlsbD0iIzE2MWIyMiIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0ibW9ub3NwYWNlIiBmb250LXNpemU9IjE0IiBmaWxsPSIjN2Q4NTkwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+WW91ciBQaG90bzwvdGV4dD4KPC9zdmc+" alt="Profile">
+                </div>
+                <h1>Hamam Yusuf A.</h1>
+                <p class="title">CyberSec Enthusiast • CTF Player</p>
+                <div class="terminal-prompt typing-effect">ArchLover@security:~$ whoami</div>
+                <nav class="nav-links">
+                    <a href="#about">about</a>
+                    <a href="#skills">skills</a>
+                    <a href="#experience">experience</a>
+                    <a href="#contact">contact</a>
+                </nav>
             </div>
-            <div class="text-center p-6 rounded-2xl glass-effect">
-              <div class="text-4xl font-bold gradient-text counter" data-target="1">0</div>
-              <p class="text-lg text-gray-600 mt-2">Years Experience</p>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2>about</h2>
+            <div class="about-content">
+                <p>I'm a cybersecurity enthusiast with a passion for competitive hacking and vulnerability research. I participate actively in CTF competitions and enjoy solving complex security challenges. My expertise spans across various domains of information security, from web application security to reverse engineering.</p>
             </div>
-          </div>
-        </div>
-        <div class="image-container shadow-2xl fade-in-right floating">
-          <div class="w-full h-96 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center">
-            <div class="text-white text-8xl">🚀</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services" class="py-32 min-h-screen flex items-center bg-gradient-to-br from-white to-gray-50">
-    <div class="container mx-auto px-6 max-w-7xl">
-      <div class="text-center mb-20 fade-in">
-        <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Our Services</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          Comprehensive solutions to drive your business forward with cutting-edge technology
-        </p>
-      </div>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div class="glass-effect p-10 rounded-3xl shadow-2xl card-hover fade-in border border-white/20">
-          <div class="mb-8 text-center">
-            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-500 flex items-center justify-center mb-6">
-              <span class="text-3xl">💻</span>
+            
+            <div class="ctf-stats">
+                <div class="stat-card">
+                    <span class="stat-number">60+</span>
+                    <div class="stat-label">CTF Challenges Solved</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6</span>
+                    <div class="stat-label">CTF Competitions</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">Top 10723</span>
+                    <div class="stat-label">Global Ranking</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">0</span>
+                    <div class="stat-label">CVEs Found</div>
+                </div>
             </div>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Software Development</h3>
-          <p class="text-gray-600 leading-relaxed text-center text-lg">Custom software solutions tailored to your business needs with cutting-edge technologies and modern frameworks.</p>
         </div>
-        <div class="glass-effect p-10 rounded-3xl shadow-2xl card-hover fade-in border border-white/20">
-          <div class="mb-8 text-center">
-            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center mb-6">
-              <span class="text-3xl">📊</span>
+    </section>
+
+    <section id="skills" class="section">
+        <div class="container">
+            <h2>skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>penetration_testing</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">burp_suite</span>
+                        <span class="skill-tag">metasploit</span>
+                        <span class="skill-tag">nmap</span>
+                        <span class="skill-tag">sqlmap</span>
+                        <span class="skill-tag">gobuster</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>reverse_engineering</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">ida_pro</span>
+                        <span class="skill-tag">ghidra</span>
+                        <span class="skill-tag">gdb</span>
+                        <span class="skill-tag">radare2</span>
+                        <span class="skill-tag">x64dbg</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>programming</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">python</span>
+                        <span class="skill-tag">c/c++</span>
+                        <span class="skill-tag">javascript</span>
+                        <span class="skill-tag">bash</span>
+                        <span class="skill-tag">assembly</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>ctf_categories</h3>
+                    <div class="skill-tags">
+                        <span class="skill-tag">web</span>
+                        <span class="skill-tag">pwn</span>
+                        <span class="skill-tag">crypto</span>
+                        <span class="skill-tag">forensics</span>
+                        <span class="skill-tag">steganography</span>
+                    </div>
+                </div>
             </div>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Cyber Security</h3>
-          <p class="text-gray-600 leading-relaxed text-center text-lg">Securing your information technology.</p>
         </div>
-        <div class="glass-effect p-10 rounded-3xl shadow-2xl card-hover fade-in border border-white/20">
-          <div class="mb-8 text-center">
-            <div class="w-20 h-20 mx-auto rounded-2xl bg-gradient-to-r from-green-500 to-teal-500 flex items-center justify-center mb-6">
-              <span class="text-3xl">🤖</span>
+    </section>
+
+    <section id="experience" class="section">
+        <div class="container">
+            <h2>experience</h2>
+            <ul class="experience-list">
+                <li class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Security Analyst</div>
+                            <div class="experience-company">Company Name</div>
+                        </div>
+                        <div class="experience-date">2023 - Present</div>
+                    </div>
+                    <div class="experience-description">
+                        Conduct security assessments, vulnerability analysis, and incident response. Lead penetration testing engagements and develop security tools for the organization.
+                    </div>
+                </li>
+                
+                <li class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">CTF Team Lead</div>
+                            <div class="experience-company">TeamName CTF</div>
+                        </div>
+                        <div class="experience-date">2022 - Present</div>
+                    </div>
+                    <div class="experience-description">
+                        Lead a competitive CTF team participating in international competitions. Specialize in web exploitation and reverse engineering challenges.
+                    </div>
+                </li>
+                
+                <li class="experience-item">
+                    <div class="experience-header">
+                        <div>
+                            <div class="experience-title">Bug Bounty Hunter</div>
+                            <div class="experience-company">Various Programs</div>
+                        </div>
+                        <div class="experience-date">2021 - Present</div>
+                    </div>
+                    <div class="experience-description">
+                        Discovered and reported security vulnerabilities in web applications and mobile apps through various bug bounty programs.
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>contact</h2>
+            <div class="contact-section">
+                <p>Let's connect and collaborate on security research</p>
+                <div class="contact-links">
+                    <a href="mailto:your.email@domain.com" class="contact-link">
+                        <span>📧</span>
+                        email
+                    </a>
+                    <a href="#" class="contact-link">
+                        <span>🐙</span>
+                        github
+                    </a>
+                    <a href="#" class="contact-link">
+                        <span>🐦</span>
+                        twitter
+                    </a>
+                    <a href="#" class="contact-link">
+                        <span>💼</span>
+                        linkedin
+                    </a>
+                </div>
             </div>
-          </div>
-          <h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Healthy Drink for Programmer</h3>
-          <p class="text-gray-600 leading-relaxed text-center text-lg">Make programmer have a long life.</p>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Team Section -->
-  <section id="team" class="py-32 bg-gradient-to-br from-gray-50 to-white min-h-screen flex items-center">
-    <div class="container mx-auto px-6 max-w-7xl">
-      <div class="text-center mb-20 fade-in">
-        <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Meet Our Team</h2>
-        <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-          The brilliant minds and innovators behind our success stories
-        </p>
-      </div>
-      <div class="grid md:grid-cols-4 gap-10">
-        <div class="text-center team-card fade-in">
-          <div class="mb-8 team-image w-40 h-40 mx-auto">
-            <div class="w-full h-full rounded-full bg-gradient-to-r from-pink-400 to-red-400 flex items-center justify-center shadow-xl">
-              <span class="text-5xl">👩‍💼</span>
-            </div>
-          </div>
-
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Your Name. Built with passion for security research.</p>
         </div>
-        <div class="text-center team-card fade-in">
-          <div class="mb-8 team-image w-40 h-40 mx-auto">
-            <div class="w-full h-full rounded-full bg-gradient-to-r from-blue-400 to-indigo-400 flex items-center justify-center shadow-xl">
-              <span class="text-5xl">👨‍💻</span>
-            </div>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Hamam Yusuf A.</h3>
-          <p class="text-gray-600 text-lg mb-4">CEO & Founder</p>
-        </div>
-        <div class="text-center team-card fade-in">
-          <div class="mb-8 team-image w-40 h-40 mx-auto">
-            <div class="w-full h-full rounded-full bg-gradient-to-r from-purple-400 to-pink-400 flex items-center justify-center shadow-xl">
-              <span class="text-5xl">👩‍💻</span>
-            </div>
-          </div>
-          <h3 class="text-xl font-bold text-gray-900 mb-2">Hamas A.</h3>
-          <p class="text-gray-600 text-lg mb-4">CO Founder</p>
-        </div>
-        <div class="text-center team-card fade-in">
-          <div class="mb-8 team-image w-40 h-40 mx-auto">
-            <div class="w-full h-full rounded-full bg-gradient-to-r from-green-400 to-blue-400 flex items-center justify-center shadow-xl">
-              <span class="text-5xl">👨‍💼</span>
-            </div>
-          </div>
+    </footer>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="py-32 min-h-screen flex items-center bg-gradient-to-br from-white to-gray-50">
-    <div class="container mx-auto px-6 max-w-4xl">
-      <div class="text-center mb-16 fade-in">
-        <h2 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6">Get in Touch</h2>
-        <p class="text-xl text-gray-600 leading-relaxed">
-          Ready to start your next project? Let's create something amazing together.
-        </p>
-      </div>
-      <div class="glass-effect rounded-3xl p-12 shadow-2xl border border-white/20 fade-in">
-        <form class="space-y-8" onsubmit="handleSubmit(event)">
-          <div class="grid md:grid-cols-2 gap-8">
-            <input type="text" placeholder="Your Name" class="form-input w-full px-8 py-5 border-2 border-gray-200 focus:border-blue-500 rounded-2xl bg-white/50 text-gray-900 placeholder-gray-500 focus:outline-none transition-all text-lg" required />
-            <input type="email" placeholder="Your Email" class="form-input w-full px-8 py-5 border-2 border-gray-200 focus:border-blue-500 rounded-2xl bg-white/50 text-gray-900 placeholder-gray-500 focus:outline-none transition-all text-lg" required />
-          </div>
-          <textarea placeholder="Your Message" rows="6" class="form-input w-full px-8 py-5 border-2 border-gray-200 focus:border-blue-500 rounded-2xl bg-white/50 text-gray-900 placeholder-gray-500 focus:outline-none transition-all resize-none text-lg" required></textarea>
-          <button type="submit" class="w-full py-5 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl text-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105">
-            Send Message ✨
-          </button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-20 bg-gray-900 text-white">
-    <div class="container mx-auto px-6 max-w-7xl">
-      <div class="flex flex-col md:flex-row justify-between items-center">
-        <div class="flex items-center mb-8 md:mb-0">
-          <div class="w-12 h-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center mr-4">
-            <span class="text-white font-bold text-xl">O</span>
-          </div>
-          <div>
-            <p class="text-2xl font-bold gradient-text">Ooalah</p>
-            <p class="text-gray-400">© 2025 All rights reserved.</p>
-          </div>
-        </div>
-        <div class="flex space-x-8">
-          <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg hover:scale-110 transform">LinkedIn</a>
-          <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg hover:scale-110 transform">Twitter</a>
-          <a href="#" class="text-gray-400 hover:text-white transition-colors text-lg hover:scale-110 transform">GitHub</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobileMenu');
-      const hamburger = document.querySelector('.hamburger');
-      menu.classList.toggle('open');
-      hamburger.classList.toggle('active');
-    }
-
-    // Smooth scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Typewriter effect
-    const typewriter = document.getElementById('typewriter');
-    const text = "'s World";
-    let i = 0;
-    function type() {
-      if (i < text.length) {
-        typewriter.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, 150);
-      } else {
-        setTimeout(() => {
-          typewriter.textContent = '';
-          i = 0;
-          setTimeout(type, 1000);
-        }, 3000);
-      }
-    }
-    setTimeout(type, 2000);
-
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.2,
-      rootMargin: "0px 0px -50px 0px"
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, index) => {
-        if (entry.isIntersecting && !entry.target.classList.contains('visible')) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, index * 100);
-        }
-      });
-    }, observerOptions);
-
-    // Observe all animated elements
-    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
-
-    // Counter animation
-    let counterAnimated = false;
-    function animateCounters() {
-      if (counterAnimated) return;
-      counterAnimated = true;
-      
-      const counters = document.querySelectorAll('.counter');
-      counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        let count = 0;
-        const increment = target / 100;
-        
-        const updateCounter = () => {
-          if (count < target) {
-            count += increment;
-            counter.textContent = Math.ceil(count);
-            setTimeout(updateCounter, 20);
-          } else {
-            counter.textContent = target + '+';
-          }
-        };
-        updateCounter();
-      });
-    }
-
-    // Start counter animation when about section is visible
-    const aboutSection = document.getElementById('about');
-    const aboutObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounters();
-        }
-      });
-    });
-    aboutObserver.observe(aboutSection);
-
-    // Form submission
-    function handleSubmit(event) {
-      event.preventDefault();
-      const button = event.target.querySelector('button[type="submit"]');
-      const originalText = button.textContent;
-      
-      button.innerHTML = '✨ Sending...';
-      button.disabled = true;
-      
-      setTimeout(() => {
-        button.innerHTML = '✅ Message Sent!';
-        setTimeout(() => {
-          button.textContent = originalText;
-          button.disabled = false;
-          event.target.reset();
-        }, 2000);
-      }, 1500);
-    }
-
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-      const header = document.querySelector('header');
-      if (window.scrollY > 100) {
-        header.style.background = 'rgba(255, 255, 255, 0.95)';
-        header.style.backdropFilter = 'blur(20px)';
-        header.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-      } else {
-        header.style.background = 'rgba(255, 255, 255, 0.25)';
-        header.style.backdropFilter = 'blur(20px)';
-        header.style.boxShadow = 'none';
-      }
-    });
-
-    // Team card interactions
-        // Team card interactions
-    const teamCards = document.querySelectorAll('.team-card');
-    teamCards.forEach(card => {
-        card.addEventListener('mouseenter', () => {
-            card.style.transform = 'translateY(-10px)';
-            const image = card.querySelector('.team-image');
-            if (image) {
-                image.style.boxShadow = '0 15px 35px rgba(102, 126, 234, 0.4)';
-            }
-        });
-        
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'translateY(0)';
-            const image = card.querySelector('.team-image');
-            if (image) {
-                image.style.boxShadow = '0 10px 25px rgba(0,0,0,0.1)';
-            }
-        });
-    });
-
-    // Initialize animations on page load
-    window.addEventListener('load', () => {
-        // Trigger initial animations for elements in viewport
-        setTimeout(() => {
-            document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
-                if (isElementInViewport(el)) {
-                    el.classList.add('visible');
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
                 }
             });
-        }, 300);
-    });
+        });
 
-    // Helper function to check if element is in viewport
-    function isElementInViewport(el) {
-        const rect = el.getBoundingClientRect();
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
+        // Intersection Observer for sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-    // Add scroll snap behavior for better user experience
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (event) => {
-        const mobileMenu = document.getElementById('mobileMenu');
-        const hamburger = document.querySelector('.hamburger');
-        if (mobileMenu.classList.contains('open') && 
-            !event.target.closest('#mobileMenu') && 
-            !event.target.closest('.hamburger')) {
-            mobileMenu.classList.remove('open');
-            hamburger.classList.remove('active');
-        }
-    });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
 
-    // Add keyboard accessibility for mobile menu
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') {
-            const mobileMenu = document.getElementById('mobileMenu');
-            const hamburger = document.querySelector('.hamburger');
-            if (mobileMenu.classList.contains('open')) {
-                mobileMenu.classList.remove('open');
-                hamburger.classList.remove('active');
-            }
-        }
-    });
-  </script>
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Terminal cursor animation
+        setTimeout(() => {
+            document.querySelector('.typing-effect').style.borderRight = 'none';
+        }, 4000);
+    </script>
 </body>
 </html>
